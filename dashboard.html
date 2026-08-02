@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-<title>Owner Dashboard - Creepypasta Fansss</title>
+<title>Creepypasta Fansss Editor</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,34 +12,16 @@
 
 <body>
 
-
-<header>
-
-<h1>☠ OWNER DASHBOARD ☠</h1>
-
-<nav>
-
-<a href="index.html">Home</a>
-<a href="stories.html">Stories</a>
-<a href="characters.html">Characters</a>
-<a href="games.html">Games</a>
-
-</nav>
-
-</header>
-
-
-
-<main>
+<h1>☠ OWNER EDITOR ☠</h1>
 
 
 <h2>Add Story</h2>
 
-<input id="storyTitle" placeholder="Story title">
+<input id="story" placeholder="Story name">
 
 <br><br>
 
-<textarea id="storyText" placeholder="Story description"></textarea>
+<textarea id="storyInfo" placeholder="Story description"></textarea>
 
 <br><br>
 
@@ -50,29 +31,13 @@ Add Story
 
 
 
-<h2>Add Character</h2>
-
-<input id="characterName" placeholder="Character name">
-
-<br><br>
-
-<textarea id="characterText" placeholder="Character description"></textarea>
-
-<br><br>
-
-<button onclick="addCharacter()">
-Add Character
-</button>
-
-
-
 <h2>Add Game</h2>
 
-<input id="gameName" placeholder="Game name">
+<input id="game" placeholder="Game name">
 
 <br><br>
 
-<textarea id="gameText" placeholder="Game description"></textarea>
+<textarea id="gameInfo" placeholder="Game description"></textarea>
 
 <br><br>
 
@@ -82,34 +47,103 @@ Add Game
 
 
 
-<hr>
+<h2>Add Character</h2>
+
+<input id="character" placeholder="Character name">
+
+<br><br>
+
+<textarea id="characterInfo" placeholder="Character description"></textarea>
+
+<br><br>
+
+<button onclick="addCharacter()">
+Add Character
+</button>
 
 
-<h2>Manage Content</h2>
 
+<h2>Your Added Stuff</h2>
 
-<div id="manage"></div>
-
-
-
-</main>
+<div id="list"></div>
 
 
 
 <script>
 
 
-function getData(name){
+function show(){
 
-return JSON.parse(localStorage.getItem(name)) || [];
+let list=document.getElementById("list");
 
-}
+list.innerHTML="";
+
+
+let stories=
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+let games=
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+let characters=
+JSON.parse(localStorage.getItem("characters")) || [];
 
 
 
-function saveData(name,data){
+stories.forEach(function(x){
 
-localStorage.setItem(name,JSON.stringify(data));
+list.innerHTML +=
+
+"<div class='card'>" +
+
+"<h3>📖 "+x.name+"</h3>" +
+
+"<p>"+x.info+"</p>" +
+
+"<button onclick='removeStory("+x.id+")'>Delete</button>" +
+
+"</div>";
+
+});
+
+
+
+games.forEach(function(x){
+
+list.innerHTML +=
+
+"<div class='card'>" +
+
+"<h3>🎮 "+x.name+"</h3>" +
+
+"<p>"+x.info+"</p>" +
+
+"<button onclick='removeGame("+x.id+")'>Delete</button>" +
+
+"</div>";
+
+});
+
+
+
+characters.forEach(function(x){
+
+list.innerHTML +=
+
+"<div class='card'>" +
+
+"<h3>👁 "+x.name+"</h3>" +
+
+"<p>"+x.info+"</p>" +
+
+"<button onclick='removeCharacter("+x.id+")'>Delete</button>" +
+
+"</div>";
+
+});
+
 
 }
 
@@ -117,51 +151,28 @@ localStorage.setItem(name,JSON.stringify(data));
 
 function addStory(){
 
-let stories=getData("stories");
+let stories=
+JSON.parse(localStorage.getItem("stories")) || [];
 
 
 stories.push({
 
 id:Date.now(),
 
-title:
-storyTitle.value,
+name:story.value,
 
-text:
-storyText.value
+info:storyInfo.value
 
 });
 
 
-saveData("stories",stories);
-
-loadManage();
-
-}
-
+localStorage.setItem(
+"stories",
+JSON.stringify(stories)
+);
 
 
-function addCharacter(){
-
-let characters=getData("characters");
-
-
-characters.push({
-
-id:Date.now(),
-
-name:
-characterName.value,
-
-text:
-characterText.value
-
-});
-
-
-saveData("characters",characters);
-
-loadManage();
+show();
 
 }
 
@@ -169,166 +180,133 @@ loadManage();
 
 function addGame(){
 
-let games=getData("games");
+let games=
+JSON.parse(localStorage.getItem("games")) || [];
 
 
 games.push({
 
 id:Date.now(),
 
-name:
-gameName.value,
+name:game.value,
 
-text:
-gameText.value
+info:gameInfo.value
 
 });
 
 
-saveData("games",games);
-
-loadManage();
-
-}
-
-
-
-
-
-function deleteItem(type,id){
-
-let data=getData(type);
-
-
-data=data.filter(item=>item.id!=id);
-
-
-saveData(type,data);
-
-
-loadManage();
-
-}
-
-
-
-
-
-function editItem(type,id){
-
-
-let data=getData(type);
-
-
-let item=data.find(x=>x.id==id);
-
-
-let newText=prompt(
-"Edit content:",
-item.text
+localStorage.setItem(
+"games",
+JSON.stringify(games)
 );
 
 
-if(newText){
-
-item.text=newText;
-
-}
-
-
-saveData(type,data);
-
-
-loadManage();
-
+show();
 
 }
 
 
 
+function addCharacter(){
+
+let characters=
+JSON.parse(localStorage.getItem("characters")) || [];
 
 
-function loadManage(){
+characters.push({
 
+id:Date.now(),
 
-let box=document.getElementById("manage");
+name:character.value,
 
-
-box.innerHTML="";
-
-
-
-let groups=[
-
-["stories","📖 Stories"],
-
-["characters","👁 Characters"],
-
-["games","🎮 Games"]
-
-];
-
-
-
-groups.forEach(group=>{
-
-
-let data=getData(group[0]);
-
-
-box.innerHTML+=`<h3>${group[1]}</h3>`;
-
-
-
-data.forEach(item=>{
-
-
-let name=item.title || item.name;
-
-
-box.innerHTML+=`
-
-<div class="card">
-
-<h3>${name}</h3>
-
-<p>${item.text}</p>
-
-
-<button onclick="editItem('${group[0]}',${item.id})">
-
-Edit
-
-</button>
-
-
-<button onclick="deleteItem('${group[0]}',${item.id})">
-
-Delete
-
-</button>
-
-
-</div>
-
-`;
-
+info:characterInfo.value
 
 });
 
 
-});
+localStorage.setItem(
+"characters",
+JSON.stringify(characters)
+);
 
+
+show();
 
 }
 
 
 
-loadManage();
+
+function removeStory(id){
+
+let stories=
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+stories =
+stories.filter(x=>x.id!=id);
+
+
+localStorage.setItem(
+"stories",
+JSON.stringify(stories)
+);
+
+
+show();
+
+}
+
+
+
+function removeGame(id){
+
+let games=
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+games =
+games.filter(x=>x.id!=id);
+
+
+localStorage.setItem(
+"games",
+JSON.stringify(games)
+);
+
+
+show();
+
+}
+
+
+
+function removeCharacter(id){
+
+let characters=
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+characters =
+characters.filter(x=>x.id!=id);
+
+
+localStorage.setItem(
+"characters",
+JSON.stringify(characters)
+);
+
+
+show();
+
+}
+
+
+
+show();
 
 
 </script>
-
 
 
 </body>
