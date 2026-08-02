@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Builder Mode | Creepypasta Fansss</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>☠ Creepypasta Builder Mode ☠</h1>
+
+<a href="dashboard.html">
+<button>
+⬅ Back To Owner Editor
+</button>
+</a>
+
+</header>
+
+
+
+<main>
+
+
+<h2>🛠 Tools</h2>
+
+
+<button onclick="addText()">
+➕ Add Text
+</button>
+
+
+<button onclick="addImage()">
+🖼 Add Image
+</button>
+
+
+<button onclick="addButton()">
+🔘 Add Button
+</button>
+
+
+<button onclick="clearPage()">
+❌ Clear Page
+</button>
+
+
+
+<h2>👁 Page Preview</h2>
+
+
+<div id="page">
+
+</div>
+
+
+
+<br>
+
+
+<button onclick="savePage()">
+💾 Save Design
+</button>
+
+
+
+</main>
+
+
+
+
+
+<script>
+
+
+let page = document.getElementById("page");
+
+
+
+function addText(){
+
+
+let text = prompt(
+"Enter your text:"
+);
+
+
+
+if(text){
+
+
+let box =
+document.createElement("div");
+
+
+box.className="card";
+
+
+box.innerHTML =
+text;
+
+
+
+page.appendChild(box);
+
+
+}
+
+
+}
+
+
+
+
+
+function addImage(){
+
+
+let url = prompt(
+"Paste image URL:"
+);
+
+
+
+if(url){
+
+
+let img =
+document.createElement("img");
+
+
+img.src=url;
+
+
+img.style.width="250px";
+
+
+page.appendChild(img);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+function addButton(){
+
+
+let name = prompt(
+"Button name:"
+);
+
+
+
+if(name){
+
+
+let button =
+document.createElement("button");
+
+
+button.innerHTML=name;
+
+
+page.appendChild(button);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+function clearPage(){
+
+
+if(confirm("Delete everything?")){
+
+
+page.innerHTML="";
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+function savePage(){
+
+
+localStorage.setItem(
+"customPage",
+page.innerHTML
+);
+
+
+alert("Design Saved!");
+
+}
+
+
+
+let saved =
+localStorage.getItem("customPage");
+
+
+
+if(saved){
+
+
+page.innerHTML=saved;
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
