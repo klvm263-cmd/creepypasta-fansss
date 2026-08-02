@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Character Lore | Creepypasta Fansss</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+<h1>👁 Character Lore 👁</h1>
+
+
+<a href="characters.html">
+
+<button>
+⬅ Back To Characters
+</button>
+
+</a>
+
+
+</header>
+
+
+
+
+<main>
+
+
+<div id="profile"></div>
+
+
+</main>
+
+
+
+
+<script>
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+
+let params =
+new URLSearchParams(window.location.search);
+
+
+
+let id =
+params.get("id");
+
+
+
+let character =
+characters.find(x => x.id == id);
+
+
+
+let profile =
+document.getElementById("profile");
+
+
+
+if(character){
+
+
+profile.innerHTML = `
+
+
+<div class="card">
+
+
+<h1>
+${character.name}
+</h1>
+
+
+
+<img src="${character.image}" width="250">
+
+
+
+<h2>
+LORE
+</h2>
+
+
+
+<p>
+${character.info}
+</p>
+
+
+
+</div>
+
+
+`;
+
+
+}
+
+else {
+
+
+profile.innerHTML = `
+
+<div class="card">
+
+<h2>
+Character Not Found
+</h2>
+
+</div>
+
+`;
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
