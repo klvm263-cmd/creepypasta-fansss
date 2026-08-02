@@ -3,6 +3,9 @@
 
 <head>
 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Fan Games | Creepypasta Fansss</title>
 
 <link rel="stylesheet" href="style.css">
@@ -15,18 +18,27 @@
 
 <header>
 
-<h1>🎮 Fan Games 🎮</h1>
+<h1>🎮 Creepypasta Fan Games 🎮</h1>
+
+<p>
+The archive of horror games and creepy projects.
+</p>
 
 
 <nav>
 
 <a href="index.html">🏠 Home</a>
+
 <a href="stories.html">📖 Stories</a>
+
 <a href="characters.html">👁 Characters</a>
+
 <a href="games.html">🎮 Games</a>
+
 <a href="editor.html">🔒 Editor</a>
 
 </nav>
+
 
 </header>
 
@@ -35,18 +47,11 @@
 <main>
 
 
-<h2>Game Archive</h2>
+<h2>🎮 Game Archive</h2>
 
 
-<div class="card">
+<div id="gameList"></div>
 
-<h3>Games Coming Soon</h3>
-
-<p>
-The owner will add games here.
-</p>
-
-</div>
 
 
 </main>
@@ -55,9 +60,98 @@ The owner will add games here.
 
 <footer>
 
-☠ Creepypasta Fansss ☠
+<p>
+☠ Creepypasta Fansss Archive ☠
+</p>
 
 </footer>
+
+
+
+<script>
+
+
+// Get saved games
+
+let games = JSON.parse(localStorage.getItem("games")) || [];
+
+
+// Find where games go
+
+let gameList = document.getElementById("gameList");
+
+
+
+// If there are no games
+
+if(games.length === 0){
+
+
+gameList.innerHTML = `
+
+<div class="card">
+
+<h3>🌑 No Games Added</h3>
+
+<p>
+The owner has not added any games yet.
+</p>
+
+</div>
+
+`;
+
+
+}
+
+
+
+// Show games
+
+else {
+
+
+games.forEach(function(game){
+
+
+gameList.innerHTML += `
+
+
+<div class="card">
+
+
+<h3>🎮 ${game.name}</h3>
+
+
+<p>
+
+${game.description}
+
+</p>
+
+
+<a href="#">
+
+View Game
+
+</a>
+
+
+</div>
+
+
+`;
+
+
+});
+
+
+}
+
+
+
+</script>
+
 
 
 </body>
