@@ -91,3 +91,58 @@ footer {
     margin-top: 40px;
     background: #001b33;
 }
+.profilePage {
+
+min-height:100vh;
+
+background:#020b18;
+
+padding:30px;
+
+text-align:center;
+
+}
+
+
+
+.profilePage h1 {
+
+font-size:45px;
+
+}
+
+
+
+.profileImage {
+
+width:350px;
+
+max-width:90%;
+
+border-radius:20px;
+
+box-shadow:0 0 25px #008cff;
+
+}
+
+
+
+.lore {
+
+background:#001426;
+
+border:2px solid #008cff;
+
+border-radius:20px;
+
+padding:30px;
+
+margin:30px auto;
+
+max-width:700px;
+
+font-size:20px;
+
+line-height:1.6;
+
+}
