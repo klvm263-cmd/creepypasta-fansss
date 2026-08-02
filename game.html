@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Game | Creepypasta Fansss</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="profilePage">
+
+
+<a href="games.html">
+
+<button>
+⬅ Back To Games
+</button>
+
+</a>
+
+
+
+<div id="gameProfile"></div>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+
+let params =
+new URLSearchParams(window.location.search);
+
+
+
+let id =
+params.get("id");
+
+
+
+let game =
+games.find(x => x.id == id);
+
+
+
+let box =
+document.getElementById("gameProfile");
+
+
+
+if(game){
+
+
+box.innerHTML = `
+
+
+<h1>
+🎮 ${game.name}
+</h1>
+
+
+<h2>
+DESCRIPTION
+</h2>
+
+
+<div class="lore">
+
+${game.info}
+
+</div>
+
+
+
+<button>
+▶ Play Game
+</button>
+
+
+`;
+
+
+
+}
+
+else{
+
+
+box.innerHTML = `
+
+<h1>
+Game Not Found
+</h1>
+
+`;
+
+}
+
+
+</script>
+
+
+
+</body>
+
+</html>
