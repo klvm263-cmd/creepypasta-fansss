@@ -1,33 +1,738 @@
-<h2>🎮 Add / Edit Game</h2>
+<!DOCTYPE html>
+<html>
 
-<input id="game" placeholder="Game Name">
+<head>
+
+<title>Creepypasta Fansss Owner Editor</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>☠ OWNER EDITOR ☠</h1>
+
+
+<a href="index.html">
+<button>⬅ Back Home</button>
+</a>
+
+
+<a href="builder.html">
+<button>🛠 Builder Mode</button>
+</a>
+
+</header>
+
+
+
+
+<main>
+
+
+
+<h2>📖 Story Editor</h2>
+
+
+<input id="storyName" placeholder="Story Name">
 
 <br><br>
+
+
+<input id="storyImage" placeholder="Story Picture URL">
+
+<br><br>
+
+
+<textarea id="storyInfo" placeholder="Story Lore"></textarea>
+
+
+<br><br>
+
+
+<button onclick="saveStory()">
+Save Story
+</button>
+
+
+
+
+
+
+
+<h2>👁 Character Editor</h2>
+
+
+<input id="characterName" placeholder="Character Name">
+
+<br><br>
+
+
+<input id="characterImage" placeholder="Character Picture URL">
+
+<br><br>
+
+
+<textarea id="characterInfo" placeholder="Character Lore"></textarea>
+
+
+<br><br>
+
+
+<button onclick="saveCharacter()">
+Save Character
+</button>
+
+
+
+
+
+
+
+
+<h2>🎮 Game Editor</h2>
+
+
+<input id="gameName" placeholder="Game Name">
+
+<br><br>
+
 
 <input id="gameImage" placeholder="Game Picture URL">
 
 <br><br>
 
+
 <textarea id="gameInfo" placeholder="Game Description"></textarea>
 
 <br><br>
+
 
 <input id="gameLink" placeholder="Game Link">
 
 <br><br>
 
+
 <select id="gameRating">
 
 <option value="1">⭐</option>
+
 <option value="2">⭐⭐</option>
+
 <option value="3">⭐⭐⭐</option>
+
 <option value="4">⭐⭐⭐⭐</option>
+
 <option value="5">⭐⭐⭐⭐⭐</option>
 
 </select>
 
+
 <br><br>
 
-<button onclick="addGame()">
+
+<button onclick="saveGame()">
 Save Game
 </button>
+
+
+
+
+
+
+
+
+<h2>📂 Your Archive</h2>
+
+
+<div id="list"></div>
+
+
+
+</main>
+
+
+
+
+
+
+<script>
+
+
+let editType = "";
+
+let editID = "";
+
+
+
+
+
+
+
+function saveStory(){
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+
+let data={
+
+
+id:editType=="story"?Number(editID):Date.now(),
+
+
+name:storyName.value,
+
+
+image:storyImage.value,
+
+
+info:storyInfo.value
+
+
+
+};
+
+
+
+
+if(editType=="story"){
+
+
+stories =
+stories.map(x=>x.id==data.id?data:x);
+
+
+}
+
+else{
+
+
+stories.push(data);
+
+
+}
+
+
+
+localStorage.setItem(
+
+"stories",
+
+JSON.stringify(stories)
+
+);
+
+
+
+clearEditor();
+
+show();
+
+
+}
+
+
+
+
+
+
+
+
+
+
+function saveCharacter(){
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+
+let data={
+
+
+id:editType=="character"?Number(editID):Date.now(),
+
+
+name:characterName.value,
+
+
+image:characterImage.value,
+
+
+info:characterInfo.value
+
+
+
+};
+
+
+
+if(editType=="character"){
+
+
+characters =
+characters.map(x=>x.id==data.id?data:x);
+
+
+}
+
+else{
+
+
+characters.push(data);
+
+
+}
+
+
+
+localStorage.setItem(
+
+"characters",
+
+JSON.stringify(characters)
+
+);
+
+
+
+clearEditor();
+
+show();
+
+
+}
+
+
+
+
+
+
+
+
+
+function saveGame(){
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+
+let data={
+
+
+id:editType=="game"?Number(editID):Date.now(),
+
+
+name:gameName.value,
+
+
+image:gameImage.value,
+
+
+info:gameInfo.value,
+
+
+link:gameLink.value,
+
+
+rating:Number(gameRating.value)
+
+
+
+};
+
+
+
+
+if(editType=="game"){
+
+
+games =
+games.map(x=>x.id==data.id?data:x);
+
+
+}
+
+else{
+
+
+games.push(data);
+
+
+}
+
+
+
+localStorage.setItem(
+
+"games",
+
+JSON.stringify(games)
+
+);
+
+
+
+clearEditor();
+
+show();
+
+
+}
+
+
+
+
+
+
+
+
+
+function show(){
+
+
+let list=document.getElementById("list");
+
+list.innerHTML="";
+
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+
+
+
+
+stories.forEach(x=>{
+
+
+list.innerHTML+=`
+
+<div class="card">
+
+
+<h2>📖 ${x.name}</h2>
+
+
+<img src="${x.image}" width="150">
+
+
+<p>${x.info}</p>
+
+
+<button onclick="editStory(${x.id})">
+✏ Edit
+</button>
+
+
+<button onclick="deleteStory(${x.id})">
+❌ Delete
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+
+
+
+
+
+characters.forEach(x=>{
+
+
+list.innerHTML+=`
+
+<div class="card">
+
+
+<h2>👁 ${x.name}</h2>
+
+
+<img src="${x.image}" width="150">
+
+
+<p>${x.info}</p>
+
+
+<button onclick="editCharacter(${x.id})">
+✏ Edit
+</button>
+
+
+<button onclick="deleteCharacter(${x.id})">
+❌ Delete
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+
+
+
+
+
+
+
+games.forEach(x=>{
+
+
+list.innerHTML+=`
+
+<div class="card">
+
+
+<h2>🎮 ${x.name}</h2>
+
+
+<img src="${x.image}" width="150">
+
+
+<p>${x.info}</p>
+
+
+<p>
+Rating:
+${"⭐".repeat(x.rating)}
+</p>
+
+
+<button onclick="editGame(${x.id})">
+✏ Edit
+</button>
+
+
+<button onclick="deleteGame(${x.id})">
+❌ Delete
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+function editStory(id){
+
+
+let data =
+JSON.parse(localStorage.getItem("stories"))
+.find(x=>x.id==id);
+
+
+editType="story";
+editID=id;
+
+
+storyName.value=data.name;
+storyImage.value=data.image;
+storyInfo.value=data.info;
+
+
+}
+
+
+
+
+
+
+
+function editCharacter(id){
+
+
+let data =
+JSON.parse(localStorage.getItem("characters"))
+.find(x=>x.id==id);
+
+
+
+editType="character";
+editID=id;
+
+
+
+characterName.value=data.name;
+
+characterImage.value=data.image;
+
+characterInfo.value=data.info;
+
+
+
+}
+
+
+
+
+
+
+
+function editGame(id){
+
+
+let data =
+JSON.parse(localStorage.getItem("games"))
+.find(x=>x.id==id);
+
+
+
+editType="game";
+
+editID=id;
+
+
+
+gameName.value=data.name;
+
+gameImage.value=data.image;
+
+gameInfo.value=data.info;
+
+gameLink.value=data.link;
+
+gameRating.value=data.rating;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function deleteStory(id){
+
+let a=JSON.parse(localStorage.getItem("stories"))||[];
+
+localStorage.setItem(
+"stories",
+JSON.stringify(a.filter(x=>x.id!=id))
+);
+
+show();
+
+}
+
+
+
+function deleteCharacter(id){
+
+let a=JSON.parse(localStorage.getItem("characters"))||[];
+
+localStorage.setItem(
+"characters",
+JSON.stringify(a.filter(x=>x.id!=id))
+);
+
+show();
+
+}
+
+
+
+function deleteGame(id){
+
+let a=JSON.parse(localStorage.getItem("games"))||[];
+
+localStorage.setItem(
+"games",
+JSON.stringify(a.filter(x=>x.id!=id))
+);
+
+show();
+
+}
+
+
+
+
+
+
+
+function clearEditor(){
+
+
+editType="";
+
+editID="";
+
+
+storyName.value="";
+storyImage.value="";
+storyInfo.value="";
+
+
+characterName.value="";
+characterImage.value="";
+characterInfo.value="";
+
+
+gameName.value="";
+gameImage.value="";
+gameInfo.value="";
+gameLink.value="";
+
+
+}
+
+
+
+
+
+
+show();
+
+
+</script>
+
+
+
+</body>
+
+</html>
