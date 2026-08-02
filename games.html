@@ -1,12 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Fan Games | Creepypasta Fansss</title>
+<title>Games | Creepypasta Fansss</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -19,10 +16,6 @@
 <header>
 
 <h1>🎮 Creepypasta Fan Games 🎮</h1>
-
-<p>
-The archive of horror games and creepy projects.
-</p>
 
 
 <nav>
@@ -47,7 +40,7 @@ The archive of horror games and creepy projects.
 <main>
 
 
-<h2>🎮 Game Archive</h2>
+<h2>Game Archive</h2>
 
 
 <div id="gameList"></div>
@@ -60,41 +53,34 @@ The archive of horror games and creepy projects.
 
 <footer>
 
-<p>
-☠ Creepypasta Fansss Archive ☠
-</p>
+☠ Creepypasta Fansss ☠
 
 </footer>
+
 
 
 
 <script>
 
 
-// Get saved games
-
 let games = JSON.parse(localStorage.getItem("games")) || [];
 
-
-// Find where games go
 
 let gameList = document.getElementById("gameList");
 
 
 
-// If there are no games
-
-if(games.length === 0){
+if(games.length == 0){
 
 
 gameList.innerHTML = `
 
 <div class="card">
 
-<h3>🌑 No Games Added</h3>
+<h3>No Games Yet</h3>
 
 <p>
-The owner has not added any games yet.
+The owner has not added any games.
 </p>
 
 </div>
@@ -102,13 +88,9 @@ The owner has not added any games yet.
 `;
 
 
+
 }
 
-
-
-// Show games
-
-else {
 
 
 games.forEach(function(game){
@@ -125,16 +107,10 @@ gameList.innerHTML += `
 
 <p>
 
-${game.description}
+${game.info}
 
 </p>
 
-
-<a href="#">
-
-View Game
-
-</a>
 
 
 </div>
@@ -143,10 +119,8 @@ View Game
 `;
 
 
+
 });
-
-
-}
 
 
 
