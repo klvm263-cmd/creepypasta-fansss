@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Editor Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<h1>🔒 Owner Login</h1>
+
+
+<p>
+Only the site owner can enter.
+</p>
+
+
+<input id="code" placeholder="Enter Code">
+
+
+<a href="#" onclick="login()">
+Enter
+</a>
+
+
+
+<p id="message"></p>
+
+
+
+<script>
+
+function login(){
+
+let password =
+document.getElementById("code").value;
+
+
+if(password=="Aug.292012"){
+
+window.location="dashboard.html";
+
+}
+
+else{
+
+document.getElementById("message").innerHTML=
+"Wrong Code";
+
+}
+
+}
+
+</script>
+
+
+</body>
+
+</html>
