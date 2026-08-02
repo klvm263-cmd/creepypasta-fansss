@@ -13,47 +13,156 @@
 <body>
 
 
-<h1>⚠ OWNER DASHBOARD ⚠</h1>
+<h1>☠ OWNER DASHBOARD ☠</h1>
 
 
-<h2>Welcome Creator</h2>
+<nav>
+
+<a href="index.html">Home</a>
+<a href="stories.html">Stories</a>
+<a href="characters.html">Characters</a>
+<a href="games.html">Games</a>
+
+</nav>
 
 
-
-<div class="card">
-
-<h3>📖 Add Story</h3>
-
-<p>
-Create new horror stories here.
-</p>
-
-</div>
+<h2>Add Story</h2>
 
 
+<input id="storyTitle" placeholder="Story Title">
 
-<div class="card">
 
-<h3>👁 Add Character</h3>
+<textarea id="storyText" placeholder="Story Description"></textarea>
 
-<p>
-Create character pages here.
-</p>
 
-</div>
+<button onclick="addStory()">
+Add Story
+</button>
 
 
 
-<div class="card">
+<h2>Add Character</h2>
 
-<h3>🎮 Add Game</h3>
 
-<p>
-Add game information here.
-</p>
+<input id="characterName" placeholder="Character Name">
 
-</div>
 
+<textarea id="characterInfo" placeholder="Character Info"></textarea>
+
+
+<button onclick="addCharacter()">
+Add Character
+</button>
+
+
+
+<h2>Add Game</h2>
+
+
+<input id="gameName" placeholder="Game Name">
+
+
+<textarea id="gameInfo" placeholder="Game Description"></textarea>
+
+
+<button onclick="addGame()">
+Add Game
+</button>
+
+
+
+<script>
+
+
+function addStory(){
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+stories.push({
+
+title:
+document.getElementById("storyTitle").value,
+
+text:
+document.getElementById("storyText").value
+
+});
+
+
+localStorage.setItem(
+"stories",
+JSON.stringify(stories)
+);
+
+
+alert("Story Added!");
+
+}
+
+
+
+
+function addCharacter(){
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+characters.push({
+
+name:
+document.getElementById("characterName").value,
+
+info:
+document.getElementById("characterInfo").value
+
+});
+
+
+localStorage.setItem(
+"characters",
+JSON.stringify(characters)
+);
+
+
+alert("Character Added!");
+
+}
+
+
+
+
+function addGame(){
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+games.push({
+
+name:
+document.getElementById("gameName").value,
+
+info:
+document.getElementById("gameInfo").value
+
+});
+
+
+localStorage.setItem(
+"games",
+JSON.stringify(games)
+);
+
+
+alert("Game Added!");
+
+}
+
+
+</script>
 
 
 </body>
