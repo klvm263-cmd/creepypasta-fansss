@@ -3,7 +3,7 @@
 
 <head>
 
-<title>Character Lore | Creepypasta Fansss</title>
+<title>Character Profile | Creepypasta Fansss</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,10 +13,9 @@
 <body>
 
 
-
 <header>
 
-<h1>👁 Character Lore 👁</h1>
+<h1>👁 Character Profile 👁</h1>
 
 
 <a href="characters.html">
@@ -52,13 +51,13 @@ JSON.parse(localStorage.getItem("characters")) || [];
 
 
 
-let params =
+let url =
 new URLSearchParams(window.location.search);
 
 
 
 let id =
-params.get("id");
+url.get("id");
 
 
 
@@ -82,23 +81,27 @@ profile.innerHTML = `
 
 
 <h1>
+
 ${character.name}
+
 </h1>
 
 
 
-<img src="${character.image}" width="250">
+<img src="${character.image}">
 
 
 
 <h2>
-LORE
+☠ LORE ☠
 </h2>
 
 
 
 <p>
+
 ${character.info}
+
 </p>
 
 
@@ -111,20 +114,31 @@ ${character.info}
 
 }
 
-else {
+
+else{
 
 
 profile.innerHTML = `
 
+
 <div class="card">
+
 
 <h2>
 Character Not Found
 </h2>
 
+
+<p>
+This page does not exist.
+</p>
+
+
 </div>
 
+
 `;
+
 
 }
 
