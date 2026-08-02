@@ -36,7 +36,7 @@
 <main>
 
 
-<h2>Choose A Character</h2>
+<h2>Tap A Character</h2>
 
 
 <div id="characterList"></div>
@@ -55,23 +55,21 @@ let characters =
 JSON.parse(localStorage.getItem("characters")) || [];
 
 
-let box =
+let list =
 document.getElementById("characterList");
 
 
 
-if(characters.length == 0){
+if(characters.length === 0){
 
 
-box.innerHTML = `
+list.innerHTML = `
 
 <div class="card">
 
-<h3>No Characters Added</h3>
+<h3>No Characters Yet</h3>
 
-<p>
-The owner has not created any characters yet.
-</p>
+<p>Add characters in Owner Editor.</p>
 
 </div>
 
@@ -84,34 +82,32 @@ The owner has not created any characters yet.
 characters.forEach(function(character){
 
 
+list.innerHTML += `
 
-box.innerHTML += `
+
+<a href="character.html?id=${character.id}" style="text-decoration:none;color:white;">
 
 
 <div class="card">
 
 
-<h3>👁 ${character.name}</h3>
+<h2>
+${character.name}
+</h2>
 
 
-<img src="${character.image}" width="200">
+<img src="${character.image}" width="220">
 
 
-
-<br><br>
-
-
-<a href="character.html?id=${character.id}">
-
-<button>
-Read Lore
-</button>
-
-</a>
-
+<p>
+Tap to read lore
+</p>
 
 
 </div>
+
+
+</a>
 
 
 `;
@@ -119,7 +115,6 @@ Read Lore
 
 
 });
-
 
 
 </script>
