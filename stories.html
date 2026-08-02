@@ -138,3 +138,34 @@ The owner will add them through Editor Mode.
 </body>
 
 </html>
+<div id="stories"></div>
+
+
+<script>
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+let box =
+document.getElementById("stories");
+
+
+stories.forEach(story => {
+
+box.innerHTML += `
+
+<div class="card">
+
+<h3>${story.title}</h3>
+
+<p>${story.text}</p>
+
+</div>
+
+`;
+
+});
+
+
+</script>
