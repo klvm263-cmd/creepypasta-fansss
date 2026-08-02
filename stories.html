@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Stories | Creepypasta Fansss</title>
 
@@ -18,22 +15,23 @@
 
 <header>
 
-<h1>☠ Creepypasta Stories ☠</h1>
-
-<p class="subtitle">
-Enter the archive of forgotten nightmares...
-</p>
+<h1>📖 Creepypasta Stories 📖</h1>
 
 
 <nav>
 
 <a href="index.html">🏠 Home</a>
+
 <a href="stories.html">📖 Stories</a>
+
 <a href="characters.html">👁 Characters</a>
-<a href="games.html">🎮 Fan Games</a>
+
+<a href="games.html">🎮 Games</a>
+
 <a href="editor.html">🔒 Editor</a>
 
 </nav>
+
 
 </header>
 
@@ -42,83 +40,11 @@ Enter the archive of forgotten nightmares...
 <main>
 
 
-<section class="intro">
-
-<h2>📂 Story Archive</h2>
-
-<p>
-Browse through terrifying tales, mysterious events,
-and original horror creations.
-</p>
-
-</section>
+<h2>Story Archive</h2>
 
 
+<div id="storyList"></div>
 
-<section class="cards">
-
-
-<div class="card">
-
-<h3>🩸 Classic Stories</h3>
-
-<p>
-The most famous horror stories from the internet.
-</p>
-
-<a href="#">
-Read Archive
-</a>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>🕯 Original Stories</h3>
-
-<p>
-Stories created by the Creepypasta Fansss community.
-</p>
-
-<a href="#">
-View Stories
-</a>
-
-</div>
-
-
-
-<div class="card">
-
-<h3>🌑 Short Horrors</h3>
-
-<p>
-Quick scary stories for a late night scare.
-</p>
-
-<a href="#">
-Enter
-</a>
-
-</div>
-
-
-</section>
-
-
-
-<section class="notice">
-
-<h2>⚠ Archive Status</h2>
-
-<p>
-No stories have been added yet.
-The owner will add them through Editor Mode.
-</p>
-
-</section>
 
 
 </main>
@@ -127,45 +53,79 @@ The owner will add them through Editor Mode.
 
 <footer>
 
-<p>
-☠ Creepypasta Fansss Archive ☠
-</p>
+☠ Creepypasta Fansss ☠
 
 </footer>
+
+
+
+
+<script>
+
+
+let stories = JSON.parse(localStorage.getItem("stories")) || [];
+
+
+let storyList = document.getElementById("storyList");
+
+
+
+if(stories.length == 0){
+
+
+storyList.innerHTML = `
+
+<div class="card">
+
+<h3>No Stories Yet</h3>
+
+<p>
+The owner has not added any stories.
+</p>
+
+</div>
+
+`;
+
+
+}
+
+
+
+stories.forEach(function(story){
+
+
+storyList.innerHTML += `
+
+
+<div class="card">
+
+
+<h3>📖 ${story.name}</h3>
+
+
+<p>
+
+${story.info}
+
+</p>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+
+
+</script>
 
 
 
 </body>
 
 </html>
-<div id="stories"></div>
-
-
-<script>
-
-let stories =
-JSON.parse(localStorage.getItem("stories")) || [];
-
-
-let box =
-document.getElementById("stories");
-
-
-stories.forEach(story => {
-
-box.innerHTML += `
-
-<div class="card">
-
-<h3>${story.title}</h3>
-
-<p>${story.text}</p>
-
-</div>
-
-`;
-
-});
-
-
-</script>
