@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-<title>Owner Dashboard</title>
+<title>Owner Dashboard | Creepypasta Fansss</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -13,61 +13,78 @@
 <body>
 
 
+<header>
+
 <h1>☠ OWNER DASHBOARD ☠</h1>
 
-
 <nav>
-
 <a href="index.html">Home</a>
 <a href="stories.html">Stories</a>
 <a href="characters.html">Characters</a>
 <a href="games.html">Games</a>
-
 </nav>
 
+</header>
 
-<h2>Add Story</h2>
+
+
+<main>
+
+
+<h2>Add A Story</h2>
 
 
 <input id="storyTitle" placeholder="Story Title">
 
+<br><br>
 
-<textarea id="storyText" placeholder="Story Description"></textarea>
+<textarea id="storyDescription" placeholder="Story Description"></textarea>
 
+<br><br>
 
 <button onclick="addStory()">
-Add Story
+🩸 Add Story
 </button>
 
 
 
-<h2>Add Character</h2>
+<h2>Add A Character</h2>
 
 
 <input id="characterName" placeholder="Character Name">
 
+<br><br>
 
-<textarea id="characterInfo" placeholder="Character Info"></textarea>
+<textarea id="characterDescription" placeholder="Character Description"></textarea>
 
+<br><br>
 
 <button onclick="addCharacter()">
-Add Character
+👁 Add Character
 </button>
 
 
 
-<h2>Add Game</h2>
+<h2>Add A Game</h2>
 
 
 <input id="gameName" placeholder="Game Name">
 
+<br><br>
 
-<textarea id="gameInfo" placeholder="Game Description"></textarea>
+<textarea id="gameDescription" placeholder="Game Description"></textarea>
 
+<br><br>
 
 <button onclick="addGame()">
-Add Game
+🎮 Add Game
 </button>
+
+
+<p id="status"></p>
+
+
+</main>
 
 
 
@@ -76,17 +93,22 @@ Add Game
 
 function addStory(){
 
+let title =
+document.getElementById("storyTitle").value;
+
+
+let description =
+document.getElementById("storyDescription").value;
+
+
 let stories =
 JSON.parse(localStorage.getItem("stories")) || [];
 
 
 stories.push({
 
-title:
-document.getElementById("storyTitle").value,
-
-text:
-document.getElementById("storyText").value
+title:title,
+description:description
 
 });
 
@@ -97,7 +119,9 @@ JSON.stringify(stories)
 );
 
 
-alert("Story Added!");
+document.getElementById("status").innerHTML =
+"✅ Story Added!";
+
 
 }
 
@@ -106,17 +130,22 @@ alert("Story Added!");
 
 function addCharacter(){
 
+let name =
+document.getElementById("characterName").value;
+
+
+let description =
+document.getElementById("characterDescription").value;
+
+
 let characters =
 JSON.parse(localStorage.getItem("characters")) || [];
 
 
 characters.push({
 
-name:
-document.getElementById("characterName").value,
-
-info:
-document.getElementById("characterInfo").value
+name:name,
+description:description
 
 });
 
@@ -127,14 +156,25 @@ JSON.stringify(characters)
 );
 
 
-alert("Character Added!");
+document.getElementById("status").innerHTML =
+"✅ Character Added!";
+
 
 }
 
 
 
 
+
 function addGame(){
+
+let name =
+document.getElementById("gameName").value;
+
+
+let description =
+document.getElementById("gameDescription").value;
+
 
 let games =
 JSON.parse(localStorage.getItem("games")) || [];
@@ -142,11 +182,8 @@ JSON.parse(localStorage.getItem("games")) || [];
 
 games.push({
 
-name:
-document.getElementById("gameName").value,
-
-info:
-document.getElementById("gameInfo").value
+name:name,
+description:description
 
 });
 
@@ -157,9 +194,12 @@ JSON.stringify(games)
 );
 
 
-alert("Game Added!");
+document.getElementById("status").innerHTML =
+"✅ Game Added!";
+
 
 }
+
 
 
 </script>
