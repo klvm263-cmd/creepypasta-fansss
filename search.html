@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Search | Creepypasta Fansss</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🔍 Creepypasta Search</h1>
+
+
+<a href="index.html">
+<button>
+⬅ Back Home
+</button>
+</a>
+
+</header>
+
+
+
+<main>
+
+
+<input id="searchBox" placeholder="Search stories, characters, games">
+
+
+<button onclick="search()">
+Search
+</button>
+
+
+
+<div id="results"></div>
+
+
+</main>
+
+
+
+
+<script>
+
+
+function search(){
+
+
+let text =
+document.getElementById("searchBox").value.toLowerCase();
+
+
+
+let results =
+document.getElementById("results");
+
+
+results.innerHTML="";
+
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+
+
+stories.forEach(function(item){
+
+
+if(item.name.toLowerCase().includes(text)){
+
+
+results.innerHTML += `
+
+<div class="card">
+
+<h2>📖 ${item.name}</h2>
+
+<p>${item.info}</p>
+
+</div>
+
+`;
+
+}
+
+
+});
+
+
+
+
+
+characters.forEach(function(item){
+
+
+if(item.name.toLowerCase().includes(text)){
+
+
+results.innerHTML += `
+
+<div class="card">
+
+<h2>👁 ${item.name}</h2>
+
+<img src="${item.image}" width="150">
+
+<p>${item.info}</p>
+
+</div>
+
+`;
+
+}
+
+
+});
+
+
+
+
+
+
+games.forEach(function(item){
+
+
+if(item.name.toLowerCase().includes(text)){
+
+
+results.innerHTML += `
+
+<div class="card">
+
+<h2>🎮 ${item.name}</h2>
+
+<p>${item.info}</p>
+
+</div>
+
+`;
+
+}
+
+
+});
+
+
+
+}
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
