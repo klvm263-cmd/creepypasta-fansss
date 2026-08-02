@@ -1,28 +1,131 @@
-function addCharacter(){
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Characters | Creepypasta Fansss</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>👁 Character Archive 👁</h1>
+
+
+<nav>
+
+<a href="index.html">🏠 Home</a>
+<a href="stories.html">📖 Stories</a>
+<a href="characters.html">👁 Characters</a>
+<a href="games.html">🎮 Games</a>
+<a href="editor.html">🔒 Editor</a>
+
+</nav>
+
+
+</header>
+
+
+
+<main>
+
+
+<h2>Choose A Character</h2>
+
+
+<div id="characterList"></div>
+
+
+
+</main>
+
+
+
+
+<script>
+
 
 let characters =
 JSON.parse(localStorage.getItem("characters")) || [];
 
 
-characters.push({
+let box =
+document.getElementById("characterList");
 
-id:Date.now(),
 
-name:character.value,
 
-image:characterImage.value,
+if(characters.length == 0){
 
-info:characterInfo.value
+
+box.innerHTML = `
+
+<div class="card">
+
+<h3>No Characters Added</h3>
+
+<p>
+The owner has not created any characters yet.
+</p>
+
+</div>
+
+`;
+
+}
+
+
+
+characters.forEach(function(character){
+
+
+
+box.innerHTML += `
+
+
+<div class="card">
+
+
+<h3>👁 ${character.name}</h3>
+
+
+<img src="${character.image}" width="200">
+
+
+
+<br><br>
+
+
+<a href="character.html?id=${character.id}">
+
+<button>
+Read Lore
+</button>
+
+</a>
+
+
+
+</div>
+
+
+`;
+
+
 
 });
 
 
-localStorage.setItem(
-"characters",
-JSON.stringify(characters)
-);
+
+</script>
 
 
-show();
 
-}
+</body>
+
+</html>
