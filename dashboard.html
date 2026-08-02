@@ -1,8 +1,3 @@
-<a href="builder.html">
-<button>
-🛠 Builder Mode
-</button>
-</a>
 <!DOCTYPE html>
 <html>
 
@@ -22,17 +17,27 @@
 
 <h1>☠ OWNER EDITOR ☠</h1>
 
+
 <a href="index.html">
 <button>
 ⬅ Back Home
 </button>
 </a>
 
+
+<a href="builder.html">
+<button>
+🛠 Builder Mode
+</button>
+</a>
+
+
 </header>
 
 
 
 <main>
+
 
 
 <h2>📖 Add Story</h2>
@@ -51,15 +56,33 @@ Add Story
 
 
 
+
+
 <h2>🎮 Add Game</h2>
+
 
 <input id="game" placeholder="Game Name">
 
 <br><br>
 
-<textarea id="gameInfo" placeholder="Game Description"></textarea>
+
+<input id="gameImage" placeholder="Game Picture URL">
+
 
 <br><br>
+
+
+<textarea id="gameInfo" placeholder="Game Description"></textarea>
+
+
+<br><br>
+
+
+<input id="gameLink" placeholder="Game Link">
+
+
+<br><br>
+
 
 <button onclick="addGame()">
 Add Game
@@ -67,19 +90,29 @@ Add Game
 
 
 
+
+
+
+
 <h2>👁 Add Character</h2>
+
 
 <input id="character" placeholder="Character Name">
 
 <br><br>
 
+
 <input id="characterImage" placeholder="Picture URL">
 
+
 <br><br>
+
 
 <textarea id="characterInfo" placeholder="Character Lore"></textarea>
 
+
 <br><br>
+
 
 <button onclick="addCharacter()">
 Add Character
@@ -87,13 +120,18 @@ Add Character
 
 
 
-<h2>📂 Your Added Content</h2>
+
+
+
+<h2>📂 Your Content</h2>
+
 
 <div id="list"></div>
 
 
 
 </main>
+
 
 
 
@@ -124,6 +162,8 @@ JSON.parse(localStorage.getItem("characters")) || [];
 
 
 
+
+
 stories.forEach(function(x){
 
 list.innerHTML += `
@@ -148,6 +188,8 @@ Delete
 
 
 
+
+
 games.forEach(function(x){
 
 list.innerHTML += `
@@ -156,11 +198,24 @@ list.innerHTML += `
 
 <h3>🎮 ${x.name}</h3>
 
+
+<img src="${x.image}" width="150">
+
+
 <p>${x.info}</p>
+
+
+<a href="${x.link}">
+<button>
+Play Link
+</button>
+</a>
+
 
 <button onclick="deleteGame(${x.id})">
 Delete
 </button>
+
 
 </div>
 
@@ -173,11 +228,13 @@ Delete
 
 
 
+
 characters.forEach(function(x){
 
 list.innerHTML += `
 
 <div class="card">
+
 
 <h3>👁 ${x.name}</h3>
 
@@ -214,7 +271,6 @@ let stories =
 JSON.parse(localStorage.getItem("stories")) || [];
 
 
-
 stories.push({
 
 id:Date.now(),
@@ -226,19 +282,17 @@ info:storyInfo.value
 });
 
 
-
 localStorage.setItem(
 "stories",
 JSON.stringify(stories)
-
 );
-
 
 
 show();
 
 
 }
+
 
 
 
@@ -252,25 +306,25 @@ let games =
 JSON.parse(localStorage.getItem("games")) || [];
 
 
-
 games.push({
 
 id:Date.now(),
 
 name:game.value,
 
-info:gameInfo.value
+image:gameImage.value,
+
+info:gameInfo.value,
+
+link:gameLink.value
 
 });
-
 
 
 localStorage.setItem(
 "games",
 JSON.stringify(games)
-
 );
-
 
 
 show();
@@ -291,7 +345,6 @@ let characters =
 JSON.parse(localStorage.getItem("characters")) || [];
 
 
-
 characters.push({
 
 id:Date.now(),
@@ -305,13 +358,10 @@ info:characterInfo.value
 });
 
 
-
 localStorage.setItem(
 "characters",
 JSON.stringify(characters)
-
 );
-
 
 
 show();
@@ -327,7 +377,6 @@ show();
 
 function deleteStory(id){
 
-
 let stories =
 JSON.parse(localStorage.getItem("stories")) || [];
 
@@ -339,7 +388,6 @@ stories.filter(x=>x.id != id);
 localStorage.setItem(
 "stories",
 JSON.stringify(stories)
-
 );
 
 
@@ -351,10 +399,7 @@ show();
 
 
 
-
-
 function deleteGame(id){
-
 
 let games =
 JSON.parse(localStorage.getItem("games")) || [];
@@ -367,7 +412,6 @@ games.filter(x=>x.id != id);
 localStorage.setItem(
 "games",
 JSON.stringify(games)
-
 );
 
 
@@ -379,11 +423,7 @@ show();
 
 
 
-
-
-
 function deleteCharacter(id){
-
 
 let characters =
 JSON.parse(localStorage.getItem("characters")) || [];
@@ -396,7 +436,6 @@ characters.filter(x=>x.id != id);
 localStorage.setItem(
 "characters",
 JSON.stringify(characters)
-
 );
 
 
@@ -406,11 +445,11 @@ show();
 
 
 
-
 show();
 
 
 </script>
+
 
 
 </body>
