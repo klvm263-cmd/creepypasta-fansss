@@ -1,21 +1,413 @@
-<h2>Add Character</h2>
+<!DOCTYPE html>
+<html>
 
+<head>
+
+<title>Creepypasta Fansss Owner Editor</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>☠ OWNER EDITOR ☠</h1>
+
+<a href="index.html">
+<button>
+⬅ Back Home
+</button>
+</a>
+
+</header>
+
+
+
+<main>
+
+
+<h2>📖 Add Story</h2>
+
+<input id="story" placeholder="Story Name">
+
+<br><br>
+
+<textarea id="storyInfo" placeholder="Story Lore"></textarea>
+
+<br><br>
+
+<button onclick="addStory()">
+Add Story
+</button>
+
+
+
+<h2>🎮 Add Game</h2>
+
+<input id="game" placeholder="Game Name">
+
+<br><br>
+
+<textarea id="gameInfo" placeholder="Game Description"></textarea>
+
+<br><br>
+
+<button onclick="addGame()">
+Add Game
+</button>
+
+
+
+<h2>👁 Add Character</h2>
 
 <input id="character" placeholder="Character Name">
 
 <br><br>
 
-
 <input id="characterImage" placeholder="Picture URL">
 
 <br><br>
-
 
 <textarea id="characterInfo" placeholder="Character Lore"></textarea>
 
 <br><br>
 
-
 <button onclick="addCharacter()">
 Add Character
 </button>
+
+
+
+<h2>📂 Your Added Content</h2>
+
+<div id="list"></div>
+
+
+
+</main>
+
+
+
+
+<script>
+
+
+function show(){
+
+
+let list=document.getElementById("list");
+
+list.innerHTML="";
+
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+
+
+stories.forEach(function(x){
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>📖 ${x.name}</h3>
+
+<p>${x.info}</p>
+
+<button onclick="deleteStory(${x.id})">
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+
+
+
+
+games.forEach(function(x){
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>🎮 ${x.name}</h3>
+
+<p>${x.info}</p>
+
+<button onclick="deleteGame(${x.id})">
+Delete
+</button>
+
+</div>
+
+`;
+
+});
+
+
+
+
+
+
+characters.forEach(function(x){
+
+list.innerHTML += `
+
+<div class="card">
+
+<h3>👁 ${x.name}</h3>
+
+
+<img src="${x.image}" width="150">
+
+
+<p>${x.info}</p>
+
+
+<button onclick="deleteCharacter(${x.id})">
+Delete
+</button>
+
+
+</div>
+
+`;
+
+});
+
+
+
+}
+
+
+
+
+
+function addStory(){
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+
+stories.push({
+
+id:Date.now(),
+
+name:story.value,
+
+info:storyInfo.value
+
+});
+
+
+
+localStorage.setItem(
+"stories",
+JSON.stringify(stories)
+
+);
+
+
+
+show();
+
+
+}
+
+
+
+
+
+
+function addGame(){
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+
+games.push({
+
+id:Date.now(),
+
+name:game.value,
+
+info:gameInfo.value
+
+});
+
+
+
+localStorage.setItem(
+"games",
+JSON.stringify(games)
+
+);
+
+
+
+show();
+
+
+}
+
+
+
+
+
+
+
+function addCharacter(){
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+
+characters.push({
+
+id:Date.now(),
+
+name:character.value,
+
+image:characterImage.value,
+
+info:characterInfo.value
+
+});
+
+
+
+localStorage.setItem(
+"characters",
+JSON.stringify(characters)
+
+);
+
+
+
+show();
+
+
+}
+
+
+
+
+
+
+
+function deleteStory(id){
+
+
+let stories =
+JSON.parse(localStorage.getItem("stories")) || [];
+
+
+stories =
+stories.filter(x=>x.id != id);
+
+
+localStorage.setItem(
+"stories",
+JSON.stringify(stories)
+
+);
+
+
+show();
+
+}
+
+
+
+
+
+
+
+function deleteGame(id){
+
+
+let games =
+JSON.parse(localStorage.getItem("games")) || [];
+
+
+games =
+games.filter(x=>x.id != id);
+
+
+localStorage.setItem(
+"games",
+JSON.stringify(games)
+
+);
+
+
+show();
+
+}
+
+
+
+
+
+
+
+
+function deleteCharacter(id){
+
+
+let characters =
+JSON.parse(localStorage.getItem("characters")) || [];
+
+
+characters =
+characters.filter(x=>x.id != id);
+
+
+localStorage.setItem(
+"characters",
+JSON.stringify(characters)
+
+);
+
+
+show();
+
+}
+
+
+
+
+show();
+
+
+</script>
+
+
+</body>
+
+</html>
